@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Betsson_EscapeMines.Core.EscapeMinesExceptions
+namespace Betsson_EscapeMines.Core.Exceptions
 {
     public class EscapeMinesBaseException : Exception
     {

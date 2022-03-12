@@ -1,4 +1,4 @@
-﻿using Betsson_EscapeMines.Core.EscapeMinesExceptions;
+﻿using Betsson_EscapeMines.Core.Exceptions;
 using Betsson_EscapeMines.Core.Interfaces;
 using Betsson_EscapeMines.Core.Models;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ namespace Betsson_EscapeMines.Services.Services
 {
     public class MinesPointsService : IMinesPointsService
     {
-        public MinesPointsModel CheckMinesPoints(string minesPoints, BoardSize boardSize)
+        public MinesPointsModel CheckMinesPoints(BoardSize boardSize, string minesPoints)
         {
             if (string.IsNullOrEmpty(minesPoints))
                 throw new InvalidMinesPointsException("At least one mine should be on the board.");

@@ -5,4 +5,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Betsson_EscapeMines.Services\Betsson_EscapeMines.Services.csproj" />
+  </ItemGroup>
+
 </Project>

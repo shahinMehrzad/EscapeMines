@@ -1,10 +1,5 @@
-﻿using Betsson_EscapeMines.Interfaces;
-using Betsson_EscapeMines.Models;
-using Betsson_EscapeMines.Services;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Configuration;
 
 namespace Betsson_EscapeMines
 {
@@ -21,21 +16,30 @@ namespace Betsson_EscapeMines
             try
             {
                 //Read EscapeMines.txt file
-                string[] lines = File.ReadAllLines("../../../EscapeMines.txt");
+                string[] Commandlines = File.ReadAllLines("../../../EscapeMines.txt");
 
-                // Get Board Size
-                var boardSizeResponse = BoardSize(lines[0]);
-
-                if (boardSizeResponse.IsValid)
+                if (Commandlines.Length > 4)
                 {
-                    // Get Mines List
-                    MinesPointsModel minesPointsResponse = MinesPoints(boardSizeResponse.BoardSize, lines[1]);
-
-                    if (minesPointsResponse.IsValid)
-                    {
-                        //Get exit point
-                    }
+                    //var result = new 
                 }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Commands line length should be greater than or equal to 5 rows.");
+                }
+                // Get Board Size
+                //var boardSizeResponse = BoardSize(lines[0]);
+
+                //if (boardSizeResponse.IsValid)
+                //{
+                //    // Get Mines List
+                //    //MinesPointsModel minesPointsResponse = MinesPoints(boardSizeResponse.BoardSize, lines[1]);
+
+                //    //if (minesPointsResponse.IsValid)
+                //    //{
+                //    //    //Get exit point
+                //    //}
+                //}
 
                 Console.ReadLine();
             }
@@ -47,60 +51,60 @@ namespace Betsson_EscapeMines
             }
         }
 
-        private static BoardSizeModel BoardSize(string boardSize)
-        {
-            IBoardSizeService boardSizeService = new BoardSizeService();
+        //private static BoardSizeModel BoardSize(string boardSize)
+        //{
+        //    IBoardSizeService boardSizeService = new BoardSizeService();
 
-            var boardSizeRespone = new BoardSizeModel();
+        //    var boardSizeRespone = new BoardSizeModel();
 
-            try
-            {
-                boardSizeRespone = boardSizeService.CheckBoardSize(boardSize);
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Total tiles are {boardSizeRespone.BoardSize.Columns * boardSizeRespone.BoardSize.Rows}");
-                Console.WriteLine("************************");
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine();
-            }
-            catch (Exception e)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(e.Message);
-                boardSize = Console.ReadLine();                
-            }
+        //    try
+        //    {
+        //        boardSizeRespone = boardSizeService.CheckBoardSize(boardSize);
+        //        Console.ForegroundColor = ConsoleColor.Green;
+        //        Console.WriteLine($"Total tiles are {boardSizeRespone.BoardSize.Columns * boardSizeRespone.BoardSize.Rows}");
+        //        Console.WriteLine("************************");
+        //        Console.ForegroundColor = ConsoleColor.Yellow;
+        //        Console.WriteLine();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.ForegroundColor = ConsoleColor.Red;
+        //        Console.WriteLine(e.Message);
+        //        boardSize = Console.ReadLine();                
+        //    }
 
-            return boardSizeRespone;
-        }
+        //    return boardSizeRespone;
+        //}
 
-        private static MinesPointsModel MinesPoints(BoardSize boardSize, string minesPoints)
-        {
-            IMinesPointsService minesPointsService = new MinesPointsService();
-            MinesPointsModel minesPointsRespone = new MinesPointsModel();
+        //private static MinesPointsModel MinesPoints(BoardSize boardSize, string minesPoints)
+        //{
+        //    IMinesPointsService minesPointsService = new MinesPointsService();
+        //    MinesPointsModel minesPointsRespone = new MinesPointsModel();
 
-            try
-            {
-                minesPointsRespone = minesPointsService.CheckMinesPoints(minesPoints, boardSize);
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"You added {minesPointsRespone.minesPoints.Count} mines on the board.");
-                Console.WriteLine("************************");
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine();                
-            }
-            catch (Exception e)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(e.Message);
-                minesPoints = Console.ReadLine();
-            }
+        //    try
+        //    {
+        //        minesPointsRespone = minesPointsService.CheckMinesPoints(minesPoints, boardSize);
+        //        Console.ForegroundColor = ConsoleColor.Green;
+        //        Console.WriteLine($"You added {minesPointsRespone.minesPoints.Count} mines on the board.");
+        //        Console.WriteLine("************************");
+        //        Console.ForegroundColor = ConsoleColor.Yellow;
+        //        Console.WriteLine();                
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.ForegroundColor = ConsoleColor.Red;
+        //        Console.WriteLine(e.Message);
+        //        minesPoints = Console.ReadLine();
+        //    }
 
-            return minesPointsRespone;
-        }
+        //    return minesPointsRespone;
+        //}
 
-        private static ExitPointModel BoardExitPoint(BoardSize boardSize, List<MinesPoints> minesPoints, string ExitPoint)
-        {
-            IExitPointService exitPointService = new ExitPointService();
-            ExitPointModel exitPointResponse = new ExitPointModel();
-            return exitPointResponse;
-        }
+        //private static ExitPointModel BoardExitPoint(BoardSize boardSize, List<MinesPoints> minesPoints, string ExitPoint)
+        //{
+        //    IExitPointService exitPointService = new ExitPointService();
+        //    ExitPointModel exitPointResponse = new ExitPointModel();
+        //    return exitPointResponse;
+        //}
     }
 }

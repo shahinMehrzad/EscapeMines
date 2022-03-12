@@ -1,11 +1,4 @@
-﻿using Betsson_EscapeMines.EscapeMinesExceptions;
-using Betsson_EscapeMines.Interfaces;
-using Betsson_EscapeMines.Models;
-using Betsson_EscapeMines.Services;
-using Moq;
-using Xunit;
-
-namespace Betsson_EscapeMines.Xunit
+﻿namespace Betsson_EscapeMines.Xunit
 {
     public class MinesPointServiceTest
     {

@@ -1,7 +1,6 @@
-using Betsson_EscapeMines.EscapeMinesExceptions;
-using Betsson_EscapeMines.Interfaces;
+using Betsson_EscapeMines.Core.Exceptions;
+using Betsson_EscapeMines.Core.Interfaces;
 using Moq;
-using System;
 using Xunit;
 
 namespace Betsson_EscapeMines.Xunit
@@ -67,7 +66,7 @@ namespace Betsson_EscapeMines.Xunit
         {
             //Arrange
             string value = "5 3";
-            var expectedResult = new Models.BoardSizeModel() { IsValid = true };
+            var expectedResult = new Core.Models.BoardSizeModel() { IsValid = true };
             _boardService.Setup(x => x.CheckBoardSize(value)).Returns(expectedResult);
             //Act
             var result = _boardService.Object.CheckBoardSize(value);

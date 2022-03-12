@@ -21,7 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Betsson_EscapeMines\Betsson_EscapeMines.csproj" />
+    <ProjectReference Include="..\Betsson_EscapeMines.Core\Betsson_EscapeMines.Core.csproj" />
+    <ProjectReference Include="..\Betsson_EscapeMines.Services\Betsson_EscapeMines.Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using Betsson_EscapeMines.Core.EscapeMinesExceptions;
+﻿using Betsson_EscapeMines.Core.Exceptions;
 using Betsson_EscapeMines.Core.Interfaces;
 using Betsson_EscapeMines.Core.Models;
 

@@ -1,4 +1,4 @@
-﻿namespace Betsson_EscapeMines.Core.EscapeMinesExceptions
+﻿namespace Betsson_EscapeMines.Core.Exceptions
 {
     public class InvalidBoardSizeException : EscapeMinesBaseException
     {

@@ -14,10 +14,10 @@ namespace Betsson_EscapeMines.Services
             var splitBoardSize = boardSize.Split(" ");
 
             if (splitBoardSize.Length != 2)
-                throw new InvalidBoardSizeException("Please enter a valid board size. For example : 4 5");
+                throw new InvalidBoardSizeException("Please enter a valid board size. Enter values separated by a space. For example : 4 5");
             
             if (!int.TryParse(splitBoardSize[0], out int value) || !int.TryParse(splitBoardSize[1], out int value2))
-                throw new InvalidBoardSizeException("Please enter a valid board size. For example : 4 5");
+                throw new InvalidBoardSizeException("Please enter a valid board size. There are only numbers that are acceptable, and the maximum is 2,147,483,647. For example : 4 5");
 
             int column = int.Parse(splitBoardSize[0]);
             int row = int.Parse(splitBoardSize[1]);

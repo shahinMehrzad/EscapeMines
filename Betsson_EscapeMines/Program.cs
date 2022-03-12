@@ -31,6 +31,7 @@ namespace Betsson_EscapeMines
             IBoardSizeService boardSizeService = new BoardSizeService();
             Console.WriteLine("Please enter number of columns and rows(For example : 4 5) :");
             var boardSize = Console.ReadLine();
+
             var boardSizeRespone = new BoardSizeResponse();
             while (!boardSizeRespone.IsValid)
             {
@@ -43,21 +44,16 @@ namespace Betsson_EscapeMines
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(e.Message);
                     boardSize = Console.ReadLine();
-                    boardSizeRespone = boardSizeService.CheckBoardSize(boardSize);
                 }
             }
 
-
-
-
-            //Console.ForegroundColor = ConsoleColor.Green;
-            //Console.WriteLine($"Your enterd table columns : {boardSizeRespone.boardSize.Columns} and rows : {boardSizeRespone.boardSize.Rows}");
-            //Console.WriteLine($"Total tiles are {boardSizeRespone.boardSize.Columns * boardSizeRespone.boardSize.Rows}");
-            //Console.WriteLine("************************");
-            //Console.ForegroundColor = ConsoleColor.Yellow;
-            //Console.WriteLine();
-            //return boardSizeRespone.boardSize;
-            return new BoardSize();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Your enterd table columns : {boardSizeRespone.boardSize.Columns} and rows : {boardSizeRespone.boardSize.Rows}");
+            Console.WriteLine($"Total tiles are {boardSizeRespone.boardSize.Columns * boardSizeRespone.boardSize.Rows}");
+            Console.WriteLine("************************");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine();
+            return boardSizeRespone.boardSize;
         }
 
         private static List<MinesPoints> MinesPoints(BoardSize boardSize)

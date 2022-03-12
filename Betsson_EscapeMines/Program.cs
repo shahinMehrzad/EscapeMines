@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Betsson_EscapeMines.Services.Services;
+using System;
 using System.IO;
 
 namespace Betsson_EscapeMines
@@ -20,7 +21,7 @@ namespace Betsson_EscapeMines
 
                 if (Commandlines.Length > 4)
                 {
-                    //var result = new 
+                    var result = new GameOprator(Commandlines);
                 }
                 else
                 {
@@ -43,11 +44,11 @@ namespace Betsson_EscapeMines
 
                 Console.ReadLine();
             }
-            catch
+            catch(Exception e)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("************************");
-                Console.WriteLine("EscapeMines.txt file is not found. Add this file too root of project.");
+                Console.WriteLine(e.Message);
             }
         }
 

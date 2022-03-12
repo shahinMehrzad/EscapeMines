@@ -5,6 +5,6 @@ namespace Betsson_EscapeMines.Core.Interfaces
 {
     public interface IExitPointService
     {
-        ExitPointModel CheckExitPoint(BoardSize boardSize, List<MinesPoints> minesPoints, string ExitPoint);
+        ExitPointModel CheckExitPoint(BoardSize boardSize, string ExitPoint);
     }
 }

@@ -13,6 +13,7 @@ namespace Betsson_EscapeMines.Services.Services
         private readonly BoardSizeService _boardSizeService;
         private readonly MinesPointsService _minesPointsService;
         private readonly ExitPointService _exitPointService;
+        private readonly TurtleService _turtleService;
 
         private string[] Commands { get; set; }
 
@@ -22,6 +23,7 @@ namespace Betsson_EscapeMines.Services.Services
             _boardSizeService = new BoardSizeService();
             _minesPointsService = new MinesPointsService();
             _exitPointService = new ExitPointService();
+            _turtleService = new TurtleService();
 
             Run();
         }
@@ -33,7 +35,9 @@ namespace Betsson_EscapeMines.Services.Services
             //Get Mines Points
             MinesPointsModel minesPointsResponse = _minesPointsService.CheckMinesPoints(boardSizeResponse.BoardSize, Commands[1]);
             //Get Exit Point
-            ExitPointModel exitPointModel = _exitPointService.CheckExitPoint(boardSizeResponse.BoardSize, minesPointsResponse.minesPoints, Commands[2]);
+            ExitPointModel exitPointModel = _exitPointService.CheckExitPoint(boardSizeResponse.BoardSize, Commands[2]);
+            //Get Turtle Start Point
+            TurtlePointModel turtlePointModel = _turtleService.CheckTurtulePoint(boardSizeResponse.BoardSize, Commands[3]);
         }
     }
 }

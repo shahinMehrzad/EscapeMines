@@ -5,6 +5,6 @@ namespace Betsson_EscapeMines.Core.Interfaces
 {
     public interface ITurtleService
     {
-        TurtlePointModel CheckTurtulePoint(BoardSize boardSize, List<MinesPoints> minesPoints, ExitPoint exitPoint, string turtlePoint);
+        TurtlePointModel CheckTurtulePoint(BoardSize boardSize, string turtlePoint);
     }
 }

@@ -49,6 +49,7 @@ namespace Betsson_EscapeMines
 
 
 
+
             //Console.ForegroundColor = ConsoleColor.Green;
             //Console.WriteLine($"Your enterd table columns : {boardSizeRespone.boardSize.Columns} and rows : {boardSizeRespone.boardSize.Rows}");
             //Console.WriteLine($"Total tiles are {boardSizeRespone.boardSize.Columns * boardSizeRespone.boardSize.Rows}");

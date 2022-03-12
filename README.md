@@ -1,0 +1,2 @@
+# EscapeMines
+Desktop application

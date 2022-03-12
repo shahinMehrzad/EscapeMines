@@ -1,9 +1,10 @@
-﻿using Betsson_EscapeMines.Helpers;
-using Betsson_EscapeMines.Interfaces;
+﻿using Betsson_EscapeMines.Interfaces;
 using Betsson_EscapeMines.Models;
 using Betsson_EscapeMines.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Configuration;
 
 namespace Betsson_EscapeMines
 {
@@ -17,63 +18,89 @@ namespace Betsson_EscapeMines
             Console.WriteLine("Welcome to Escape Mines!");
             Console.WriteLine("************************");
 
-            // Get Board Size
-            BoardSize boardSize = BoardSize();
-
-            // Get Mines List
-            List<MinesPoints> minesPoints = MinesPoints(boardSize);
-
-            Console.ReadLine();
-        }
-
-        private static BoardSize BoardSize()
-        {
-            IBoardSizeService boardSizeService = new BoardSizeService();
-            Console.WriteLine("Please enter number of columns and rows(For example : 4 5) :");
-            var boardSize = Console.ReadLine();
-
-            var boardSizeRespone = new BoardSizeResponse();
-            while (!boardSizeRespone.IsValid)
+            try
             {
-                try
+                //Read EscapeMines.txt file
+                string[] lines = File.ReadAllLines("../../../EscapeMines.txt");
+
+                // Get Board Size
+                var boardSizeResponse = BoardSize(lines[0]);
+
+                if (boardSizeResponse.IsValid)
                 {
-                    boardSizeRespone = boardSizeService.CheckBoardSize(boardSize);
+                    // Get Mines List
+                    MinesPointsModel minesPointsResponse = MinesPoints(boardSizeResponse.BoardSize, lines[1]);
+
+                    if (minesPointsResponse.IsValid)
+                    {
+                        //Get exit point
+                    }
                 }
-                catch(Exception e)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(e.Message);
-                    boardSize = Console.ReadLine();
-                }
+
+                Console.ReadLine();
             }
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Your enterd table columns : {boardSizeRespone.boardSize.Columns} and rows : {boardSizeRespone.boardSize.Rows}");
-            Console.WriteLine($"Total tiles are {boardSizeRespone.boardSize.Columns * boardSizeRespone.boardSize.Rows}");
-            Console.WriteLine("************************");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine();
-            return boardSizeRespone.boardSize;
-        }
-
-        private static List<MinesPoints> MinesPoints(BoardSize boardSize)
-        {
-            MinesPointsHelper minesPointsHelper = new MinesPointsHelper();
-            Console.WriteLine("Please enter list of mines points(For example = 1,1 3,1 3,3) :");
-            var minesPoints = Console.ReadLine();
-            var minesPointsRespone = minesPointsHelper.CheckMinesPoints(minesPoints, boardSize);
-            while (!minesPointsRespone.IsValid)
+            catch
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(minesPointsRespone.Message);
-                minesPoints = Console.ReadLine();
-                minesPointsRespone = minesPointsHelper.CheckMinesPoints(minesPoints, boardSize);
+                Console.WriteLine("************************");
+                Console.WriteLine("EscapeMines.txt file is not found. Add this file too root of project.");
             }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Your added : {minesPointsRespone.minesPoints.Count} mines on the board ");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine();
-            return minesPointsRespone.minesPoints;
+        }
+
+        private static BoardSizeModel BoardSize(string boardSize)
+        {
+            IBoardSizeService boardSizeService = new BoardSizeService();
+
+            var boardSizeRespone = new BoardSizeModel();
+
+            try
+            {
+                boardSizeRespone = boardSizeService.CheckBoardSize(boardSize);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Total tiles are {boardSizeRespone.BoardSize.Columns * boardSizeRespone.BoardSize.Rows}");
+                Console.WriteLine("************************");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine();
+            }
+            catch (Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                boardSize = Console.ReadLine();                
+            }
+
+            return boardSizeRespone;
+        }
+
+        private static MinesPointsModel MinesPoints(BoardSize boardSize, string minesPoints)
+        {
+            IMinesPointsService minesPointsService = new MinesPointsService();
+            MinesPointsModel minesPointsRespone = new MinesPointsModel();
+
+            try
+            {
+                minesPointsRespone = minesPointsService.CheckMinesPoints(minesPoints, boardSize);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"You added {minesPointsRespone.minesPoints.Count} mines on the board.");
+                Console.WriteLine("************************");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine();                
+            }
+            catch (Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                minesPoints = Console.ReadLine();
+            }
+
+            return minesPointsRespone;
+        }
+
+        private static ExitPointModel BoardExitPoint(BoardSize boardSize, List<MinesPoints> minesPoints, string ExitPoint)
+        {
+            IExitPointService exitPointService = new ExitPointService();
+            ExitPointModel exitPointResponse = new ExitPointModel();
+            return exitPointResponse;
         }
     }
 }

@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Betsson_EscapeMines", "Betsson_EscapeMines\Betsson_EscapeMines.csproj", "{F179FB56-9506-436D-AECE-3F59AB007A99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Betsson_EscapeMines.Xunit", "Betsson_EscapeMines.Xunit\Betsson_EscapeMines.Xunit.csproj", "{0D2563BD-117A-42E1-83A8-226AAA4C32D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Betsson_EscapeMines.Xunit", "Betsson_EscapeMines.Xunit\Betsson_EscapeMines.Xunit.csproj", "{0D2563BD-117A-42E1-83A8-226AAA4C32D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Betsson_EscapeMines.Core", "Betsson_EscapeMines.Core\Betsson_EscapeMines.Core.csproj", "{116AE6A9-11DB-4F04-80D3-2681DB5F29D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Betsson_EscapeMines.Services", "Betsson_EscapeMines.Services\Betsson_EscapeMines.Services.csproj", "{F6D9BC90-A37B-4845-BACE-32C41E3A8D64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{0D2563BD-117A-42E1-83A8-226AAA4C32D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D2563BD-117A-42E1-83A8-226AAA4C32D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D2563BD-117A-42E1-83A8-226AAA4C32D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{116AE6A9-11DB-4F04-80D3-2681DB5F29D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{116AE6A9-11DB-4F04-80D3-2681DB5F29D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{116AE6A9-11DB-4F04-80D3-2681DB5F29D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{116AE6A9-11DB-4F04-80D3-2681DB5F29D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6D9BC90-A37B-4845-BACE-32C41E3A8D64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6D9BC90-A37B-4845-BACE-32C41E3A8D64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6D9BC90-A37B-4845-BACE-32C41E3A8D64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6D9BC90-A37B-4845-BACE-32C41E3A8D64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

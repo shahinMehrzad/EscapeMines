@@ -61,5 +61,18 @@ namespace Betsson_EscapeMines.Xunit
             //Assert
             Assert.Throws<InvalidBoardSizeException>(() => _boardService.Object.CheckBoardSize(value));
         }
+
+        [Fact]
+        public void CheckBoardSize_ShouldReturnTrue_OnValuesAreAccaptable()
+        {
+            //Arrange
+            string value = "5 3";
+            var expectedResult = new Models.BoardSizeModel() { IsValid = true };
+            _boardService.Setup(x => x.CheckBoardSize(value)).Returns(expectedResult);
+            //Act
+            var result = _boardService.Object.CheckBoardSize(value);
+            //Assert
+            Assert.True(result.IsValid);
+        }
     }
 }

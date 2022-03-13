@@ -5,13 +5,13 @@ using Xunit;
 
 namespace Betsson_EscapeMines.Xunit
 {
-    public class ExitPointServiceTest
+    public class TurtleServiceTest
     {
-        private readonly ExitPointService _exitPointService;
+        private readonly TurtleService _turtleService;
 
-        public ExitPointServiceTest()
+        public TurtleServiceTest()
         {
-            _exitPointService = new ExitPointService();
+            _turtleService = new TurtleService();
         }
 
         [Theory]
@@ -20,10 +20,11 @@ namespace Betsson_EscapeMines.Xunit
         [InlineData("1 t")]
         [InlineData("1 -1")]
         [InlineData("5 1")]
-        public void ExitPoint_CheckExitPoint_InvalidExitPoint_Failure(params string[] ExitPoint)
+        [InlineData("2 3 X")]
+        public void TurtleService_CheckTurtulePoint_InvalidTurtlePoint_Failure(params string[] ExitPoint)
         {
             var boardSize = new BoardSize() { Columns = 5, Rows = 4 };
-            Assert.Throws<InvalidExitPointException>(() => _exitPointService.CheckExitPoint(boardSize, ExitPoint[0]));
+            Assert.Throws<InvalidTurtlePointException>(() => _turtleService.CheckTurtulePoint(boardSize, ExitPoint[0]));
         }
     }
 }

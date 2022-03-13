@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Betsson_EscapeMines.Core.Enums
 {
-    public enum Direction
+    public enum Status
     {
-        N, // North
-		S, // South
-        E, // East
-        W  // West
+        StillInDanger,
+        Success,
+        MineHit        
     }
 }

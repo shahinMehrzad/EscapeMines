@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Betsson_EscapeMines.Core.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Betsson_EscapeMines.Core.Interfaces
 {
-    public class IGameOprator
+    public interface IGameOprator
     {
+        List<MatchMovementModel> MatchMovement(string[] commandLines);
     }
 }

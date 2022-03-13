@@ -20,8 +20,8 @@ namespace Betsson_EscapeMines.Services.Services
             if (!int.TryParse(splitExitPoint[0], out int value) || !int.TryParse(splitExitPoint[1], out int value2))
                 throw new InvalidExitPointException($"This value is invalid. There are only numbers that are acceptable, and the maximum is {boardSize.Columns} for column and {boardSize.Rows} for row.");
 
-            int x = int.Parse(splitExitPoint[0]);
-            int y = int.Parse(splitExitPoint[1]);
+            int x = int.Parse(splitExitPoint[0]) + 1;
+            int y = int.Parse(splitExitPoint[1]) + 1;
 
             if (x < 1 || y < 1)
                 throw new InvalidExitPointException("This value is invalid. The exit point values should be greater than zero.");

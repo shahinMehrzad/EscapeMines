@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Betsson_EscapeMines.Core.Enums
 {
-    public enum Direction
+    public enum MoveCommand
     {
-        N, // North
-		S, // South
-        E, // East
-        W  // West
+        Invalid,
+        M, // Move Forward
+        R, // Move Right
+        L // Move Left        
     }
 }

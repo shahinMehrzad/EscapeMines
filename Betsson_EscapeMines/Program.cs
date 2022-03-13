@@ -1,6 +1,10 @@
-﻿using Betsson_EscapeMines.Services.Services;
+﻿using Betsson_EscapeMines.Core.Interfaces;
+using Betsson_EscapeMines.Core.Models;
+using Betsson_EscapeMines.Services.Services;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
 namespace Betsson_EscapeMines
 {
@@ -8,6 +12,7 @@ namespace Betsson_EscapeMines
     {
         static void Main(string[] args)
         {
+            IGameOprator gameOprator = new GameOprator();
             // Set the Foreground color to yellow
             Console.ForegroundColor = ConsoleColor.Yellow;
 
@@ -21,27 +26,14 @@ namespace Betsson_EscapeMines
 
                 if (Commandlines.Length > 4)
                 {
-                    var result = new GameOprator(Commandlines);
+                    var result = gameOprator.MatchMovement(Commandlines);
+                    MatchReport(result);
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Commands line length should be greater than or equal to 5 rows.");
                 }
-                // Get Board Size
-                //var boardSizeResponse = BoardSize(lines[0]);
-
-                //if (boardSizeResponse.IsValid)
-                //{
-                //    // Get Mines List
-                //    //MinesPointsModel minesPointsResponse = MinesPoints(boardSizeResponse.BoardSize, lines[1]);
-
-                //    //if (minesPointsResponse.IsValid)
-                //    //{
-                //    //    //Get exit point
-                //    //}
-                //}
-
                 Console.ReadLine();
             }
             catch(Exception e)
@@ -52,60 +44,30 @@ namespace Betsson_EscapeMines
             }
         }
 
-        //private static BoardSizeModel BoardSize(string boardSize)
-        //{
-        //    IBoardSizeService boardSizeService = new BoardSizeService();
-
-        //    var boardSizeRespone = new BoardSizeModel();
-
-        //    try
-        //    {
-        //        boardSizeRespone = boardSizeService.CheckBoardSize(boardSize);
-        //        Console.ForegroundColor = ConsoleColor.Green;
-        //        Console.WriteLine($"Total tiles are {boardSizeRespone.BoardSize.Columns * boardSizeRespone.BoardSize.Rows}");
-        //        Console.WriteLine("************************");
-        //        Console.ForegroundColor = ConsoleColor.Yellow;
-        //        Console.WriteLine();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.ForegroundColor = ConsoleColor.Red;
-        //        Console.WriteLine(e.Message);
-        //        boardSize = Console.ReadLine();                
-        //    }
-
-        //    return boardSizeRespone;
-        //}
-
-        //private static MinesPointsModel MinesPoints(BoardSize boardSize, string minesPoints)
-        //{
-        //    IMinesPointsService minesPointsService = new MinesPointsService();
-        //    MinesPointsModel minesPointsRespone = new MinesPointsModel();
-
-        //    try
-        //    {
-        //        minesPointsRespone = minesPointsService.CheckMinesPoints(minesPoints, boardSize);
-        //        Console.ForegroundColor = ConsoleColor.Green;
-        //        Console.WriteLine($"You added {minesPointsRespone.minesPoints.Count} mines on the board.");
-        //        Console.WriteLine("************************");
-        //        Console.ForegroundColor = ConsoleColor.Yellow;
-        //        Console.WriteLine();                
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.ForegroundColor = ConsoleColor.Red;
-        //        Console.WriteLine(e.Message);
-        //        minesPoints = Console.ReadLine();
-        //    }
-
-        //    return minesPointsRespone;
-        //}
-
-        //private static ExitPointModel BoardExitPoint(BoardSize boardSize, List<MinesPoints> minesPoints, string ExitPoint)
-        //{
-        //    IExitPointService exitPointService = new ExitPointService();
-        //    ExitPointModel exitPointResponse = new ExitPointModel();
-        //    return exitPointResponse;
-        //}
+        private static void MatchReport(List<MatchMovementModel> matchMovements)
+        {
+            foreach(var item in matchMovements)
+            {
+                switch (item.Status)
+                {
+                    case Core.Enums.Status.Success:
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(item.Message);
+                        Console.WriteLine("****************************************");
+                        break;
+                    case Core.Enums.Status.MineHit:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(item.Message);
+                        Console.WriteLine("****************************************");
+                        break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine(item.Message + $" column : {item.TurtlePoint.X} - row : {item.TurtlePoint.Y}");
+                        Console.WriteLine("**************************************** :|");
+                        break;
+                }
+                Thread.Sleep(1000);
+            }
+        }
     }
 }

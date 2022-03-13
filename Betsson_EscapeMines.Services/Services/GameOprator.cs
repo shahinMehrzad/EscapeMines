@@ -14,21 +14,22 @@ namespace Betsson_EscapeMines.Services.Services
         private readonly MinesPointsService _minesPointsService;
         private readonly ExitPointService _exitPointService;
         private readonly TurtleService _turtleService;
+        private readonly MoveService _moveService;
 
         private string[] Commands { get; set; }
 
-        public GameOprator(string[] commandLines)
-        {
-            Commands = commandLines;
+        public GameOprator()
+        {            
             _boardSizeService = new BoardSizeService();
             _minesPointsService = new MinesPointsService();
             _exitPointService = new ExitPointService();
             _turtleService = new TurtleService();
+            _moveService = new MoveService();
 
-            Run();
+                        
         }
 
-        public void Run()
+        public List<MatchMovementModel> InitializeGame()
         {
             //Get Board Size
             BoardSizeModel boardSizeResponse = _boardSizeService.CheckBoardSize(Commands[0]);
@@ -38,6 +39,20 @@ namespace Betsson_EscapeMines.Services.Services
             ExitPointModel exitPointModel = _exitPointService.CheckExitPoint(boardSizeResponse.BoardSize, Commands[2]);
             //Get Turtle Start Point
             TurtlePointModel turtlePointModel = _turtleService.CheckTurtulePoint(boardSizeResponse.BoardSize, Commands[3]);
+
+            //Run Game
+            string seriesOfMoves = null;
+            for (int i = 4; i < Commands.Length; i++)
+            {
+                seriesOfMoves += $" {Commands[i]}";
+            }
+            return _moveService.CheckMovement(boardSizeResponse.BoardSize, minesPointsResponse.minesPoints, exitPointModel.ExitPoint, turtlePointModel.TurtlePoint, seriesOfMoves.Trim());
+        }
+
+        public List<MatchMovementModel> MatchMovement(string[] commandLines)
+        {
+            Commands = commandLines;
+            return InitializeGame();
         }
     }
 }

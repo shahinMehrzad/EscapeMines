@@ -27,8 +27,8 @@ namespace Betsson_EscapeMines.Services.Services
 
                 else
                 {
-                    var x = int.Parse(splitMinesPoints[0]);
-                    var y = int.Parse(splitMinesPoints[1]);
+                    var x = int.Parse(splitMinesPoints[0]) + 1;
+                    var y = int.Parse(splitMinesPoints[1]) + 1;
                     if (x > boardSize.Columns || y > boardSize.Rows || x < 1 || y < 1)
                         throw new InvalidMinesPointsException($"The point is not within the board size. The maximum acceptable column and row sizes are {boardSize.Columns} and {boardSize.Rows}, respectively.");
 
